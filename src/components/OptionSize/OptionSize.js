@@ -1,6 +1,6 @@
 import shortid from 'shortid';
 import styles from './OptionSize.module.scss';
-import cslx from 'cslx'
+import clsx from 'clsx'
 
 const OptionSize = ({ sizes, currentSize, setCurrentSize }) => {
   return(

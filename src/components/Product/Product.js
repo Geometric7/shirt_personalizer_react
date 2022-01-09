@@ -1,10 +1,10 @@
 import styles from './Product.module.scss';
-import clsx from 'clsx';
+//import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import Button from '../Button/Button';
 import { useState } from 'react';
 import ProductImage from '../ProductImage/ProductImage';
-import shortid from 'shortid'
+//import shortid from 'shortid';
+import ProductForm from '../ProductForm/ProductForm'
 
 const Product = ({title, basePrice, colors, sizes, name }) => {
 
@@ -19,7 +19,7 @@ const getPrice = () => {
 
 const handleSubmit = e => {
     e.preventDefault();
-
+//purchase info
   console.log ('Summary')
   console.log('==================')
   console.log('Name:  ' + title)
@@ -28,9 +28,9 @@ const handleSubmit = e => {
   console.log('Color:  ' + currentColor)
 }
 
-const prepareColorClassName = color => {
+ /*const prepareColorClassName = color => {
     return styles['color' + color[0].toUpperCase() + color.substr(1).toLowerCase()];
-  };
+  };*/
 
   return (
     <article className={styles.product}>
@@ -40,22 +40,7 @@ const prepareColorClassName = color => {
           <h2 className={styles.name}>{title}</h2>
           <span className={styles.price}>Price: {getPrice()}$</span>
         </header>
-        <form>
-          <div className={styles.sizes}>
-            <h3 className={styles.optionLabel}>Sizes</h3>
-            <ul className={styles.choices}>
-              {sizes.map(size => <li key={shortid()}><button type="button" onClick={() => setCurrentSize(size.name)} className={clsx(currentSize === size.name && styles.active)}>{size.name}</button></li>)}
-              </ul>
-            <h3 className={styles.optionLabel}>Colors</h3>
-            <ul className={styles.choices}>
-              {colors.map(color => <li key={shortid()}><button type="button" onClick={() => setCurrentColor(color)} className={clsx(prepareColorClassName(color), currentColor === color && styles.active)} /></li>)}
-            </ul>
-          </div>
-
-          <Button className={styles.button}>
-            <span className="fa fa-shopping-cart" />
-          </Button>
-        </form>
+        <ProductForm handleSubmit={handleSubmit} sizes={sizes} colors={colors} currentColor={currentColor} currentSize={currentSize} setCurrentColor={setCurrentColor} setCurrentSize={setCurrentSize} />
       </div>
     </article>
   )

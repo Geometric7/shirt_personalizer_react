@@ -1,9 +1,7 @@
 import styles from './Product.module.scss';
-//import clsx from 'clsx';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import ProductImage from '../ProductImage/ProductImage';
-//import shortid from 'shortid';
 import ProductForm from '../ProductForm/ProductForm'
 
 const Product = ({title, basePrice, colors, sizes, name }) => {
@@ -11,19 +9,21 @@ const Product = ({title, basePrice, colors, sizes, name }) => {
 const [currentColor, setCurrentColor] = useState(colors[0]);
 const [currentSize, setCurrentSize] = useState(sizes[0].name);
 
-const getPrice = () => {
+const getPrice = useMemo(() => {
+  console.log('the price has been changed')
   const clickedSize = sizes.find(element => element.name === currentSize)
   return basePrice + clickedSize.additionalPrice;
-}
+}, [currentSize, basePrice, sizes]);
 
 
 const handleSubmit = e => {
     e.preventDefault();
 //purchase info
-  console.log ('Summary')
+  console.log('------------------')
+  console.log('Summary')
   console.log('==================')
   console.log('Name:  ' + title)
-  console.log('Price:  ' + getPrice())
+  console.log('Price:  ' + getPrice)
   console.log('Size:  ' + currentSize)
   console.log('Color:  ' + currentColor)
 }
@@ -38,7 +38,7 @@ const handleSubmit = e => {
       <div>
         <header>
           <h2 className={styles.name}>{title}</h2>
-          <span className={styles.price}>Price: {getPrice()}$</span>
+          <span className={styles.price}>Price: {getPrice}$</span>
         </header>
         <ProductForm handleSubmit={handleSubmit} sizes={sizes} colors={colors} currentColor={currentColor} currentSize={currentSize} setCurrentColor={setCurrentColor} setCurrentSize={setCurrentSize} />
       </div>
@@ -49,9 +49,9 @@ const handleSubmit = e => {
 Product.propTypes = {
   name: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  basePrice: PropTypes.string.isRequired,
-  colors: PropTypes.string.isRequired,
-  sizes: PropTypes.string.isRequired,
+  basePrice: PropTypes.number.isRequired,
+  colors: PropTypes.array.isRequired,
+  sizes: PropTypes.array.isRequired,
 };
 
 export default Product;

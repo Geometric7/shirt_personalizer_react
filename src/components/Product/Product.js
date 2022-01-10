@@ -9,7 +9,7 @@ const Product = ({title, basePrice, colors, sizes, name }) => {
 const [currentColor, setCurrentColor] = useState(colors[0]);
 const [currentSize, setCurrentSize] = useState(sizes[0].name);
 
-const getPrice = useMemo(() => {
+const price = useMemo(() => {
   console.log('the price has been changed')
   const clickedSize = sizes.find(element => element.name === currentSize)
   return basePrice + clickedSize.additionalPrice;
@@ -23,7 +23,7 @@ const handleSubmit = e => {
   console.log('Summary')
   console.log('==================')
   console.log('Name:  ' + title)
-  console.log('Price:  ' + getPrice)
+  console.log('Price:  ' + price)
   console.log('Size:  ' + currentSize)
   console.log('Color:  ' + currentColor)
 }
@@ -38,7 +38,7 @@ const handleSubmit = e => {
       <div>
         <header>
           <h2 className={styles.name}>{title}</h2>
-          <span className={styles.price}>Price: {getPrice}$</span>
+          <span className={styles.price}>Price: {price}$</span>
         </header>
         <ProductForm handleSubmit={handleSubmit} sizes={sizes} colors={colors} currentColor={currentColor} currentSize={currentSize} setCurrentColor={setCurrentColor} setCurrentSize={setCurrentSize} />
       </div>

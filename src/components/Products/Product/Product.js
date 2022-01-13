@@ -1,8 +1,13 @@
 import styles from './Product.module.scss';
 import PropTypes from 'prop-types';
 import { useState, useMemo } from 'react';
+<<<<<<< HEAD:src/components/Products/Product/Product.js
 import ProductImage from './ProductImage/ProductImage';
 import ProductForm from './ProductForm/ProductForm'
+=======
+import ProductImage from '../ProductImage/ProductImage';
+import ProductForm from '../ProductForm/ProductForm'
+>>>>>>> zadanie/16.4:src/components/Product/Product.js
 
 const Product = ({title, basePrice, colors, sizes, name }) => {
 
